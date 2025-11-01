@@ -1,0 +1,234 @@
+.stats-banner {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+}
+
+.stat-item h3 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Features Section */
+.features {
+    padding: 3rem 0;
+    background: white;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #718096;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid #f1f5f9;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--card-gradient);
+}
+
+.feature-card:nth-child(1) {
+    --card-gradient: linear-gradient(90deg, #ff6b6b, #feca57);
+}
+
+.feature-card:nth-child(2) {
+    --card-gradient: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.feature-card:nth-child(3) {
+    --card-gradient: linear-gradient(90deg, #48bb78, #38b2ac);
+}
+
+.feature-card:nth-child(4) {
+    --card-gradient: linear-gradient(90deg, #ed8936, #dd6b20);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    background: var(--card-gradient);
+    color: white;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #4a5568;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.quote-section {
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    text-align: center;
+}
+
+.quote-large {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #2d3748;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    line-height: 1.3;
+    font-style: italic;
+}
+
+.quote-author-large {
+    font-size: 1.2rem;
+    color: #667eea;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .stat-item h3 {
+        font-size: 2.5rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .stat-item p {
+        font-size: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .feature-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .quote-section {
+        padding: 3rem 0;
+    }
+
+    .quote-large {
+        font-size: 1.5rem;
+    }
+
+    .quote-author-large {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-grid {
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+    }
+
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .feature-card p {
+        font-size: 0.9rem;
+    }
+}

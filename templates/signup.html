@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - SehatSaarthi</title>
+  <link rel="stylesheet" href="{% static 'css/sehat_css/signup.css' %}">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left branding -->
+    <div class="brand">
+      <img src="{% static 'images/sehat_img/logo.png' %}" alt="SehatSaarthi Logo" class="logo">
+      <h1>SEHATSAARTHI</h1>
+      <p>Your compass for a Healthy Life</p>
+    </div>
+
+    <!-- Right signup box -->
+    <div class="signup-box">
+      <h2>Create an account</h2>
+      <p>It’s quick and easy.</p>
+
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="name-inputs">
+          <input type="text" name="first_name" placeholder="First name" required>
+          <input type="text" name="last_name" placeholder="Last name" required>
+        </div>
+        <input type="text" name="email" placeholder="Mobile number or Email" required>
+        <input type="password" name="password1" placeholder="New password" required>
+        <input type="password" name="password2" placeholder="Confirm password" required>
+        
+        <div class="divider"><span>OR</span></div>
+
+        <button type="button" class="google-btn">
+          <img src="{% static "images/sehat_img/google-logo.png" %}" alt="Google logo">
+          Sign up with Google
+        </button>
+
+        <button type="submit" class="primary-btn">Sign Up</button>
+      </form>
+
+      <a href="{% url 'login' %}" class="login-link">Already have an account? Log in</a>
+    </div>
+  </div>
+
+</body>
+</html>

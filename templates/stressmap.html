@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Mental Health Map</title>
+    <link rel="stylesheet" href="{% static 'css/mind_css/stressmap.css' %}">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🧠 India Mental Health Map</h1>
+        <p>Real-time visualization of mental wellness across India based on community assessments</p>
+    </div>
+
+    <div class="container">
+        <div id="map"></div>
+
+        <div class="sidebar">
+            <div class="map-controls">
+                <button class="control-btn" onclick="resetMapView()">
+                    <span>👁️</span> Reset View
+                </button>
+                <button class="control-btn" onclick="findMyLocation()">
+                    <span>📍</span> My Location
+                </button>
+                <button class="control-btn" onclick="refreshMapData()">
+                    <span>🔄</span> Refresh Data
+                </button>
+                <button class="control-btn" data-url="{% url 'mindbloom' %}" id="returnHomeBtn">
+                    <span>🏠</span> Return to Home
+                </button>
+            </div>
+            <!-- Search Section -->
+            <div class="sidebar-section">
+                <h3>🔍 Search Pincode</h3>
+                <input type="text" class="search-box" id="pincodeSearch" placeholder="Enter 6-digit pincode"
+                    maxlength="6" pattern="\d{6}">
+                <button class="search-btn" onclick="searchPincode()">Search</button>
+            </div>
+
+            <!-- Selected Pincode Info -->
+            <div class="sidebar-section" id="selectedPincodeSection" style="display: none;">
+                <h3>📍 Selected Area</h3>
+                <div class="pincode-info" id="selectedPincodeInfo"></div>
+            </div>
+
+            <!-- Overall Statistics -->
+            <div class="sidebar-section">
+                <h3>📊 Overall Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="number" id="totalPincodes">-</span>
+                        <span class="label">Areas Covered</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number" id="totalAssessments">-</span>
+                        <span class="label">Total Assessments</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number" id="avgStressLevel">-</span>
+                        <span class="label">National Avg</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number" id="highRiskAreas">-</span>
+                        <span class="label">High Risk Areas</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="sidebar-section">
+                <h3>🎨 Stress Level Guide</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #10b981;"></div>
+                    <div class="legend-label">
+                        <strong>Excellent</strong>
+                        <span>Low stress (0-30%)</span>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #fbbf24;"></div>
+                    <div class="legend-label">
+                        <strong>Good</strong>
+                        <span>Mild stress (31-50%)</span>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f97316;"></div>
+                    <div class="legend-label">
+                        <strong>Moderate</strong>
+                        <span>Moderate stress (51-75%)</span>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ef4444;"></div>
+                    <div class="legend-label">
+                        <strong>Concerning</strong>
+                        <span>High stress (76-100%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="sidebar-section loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Loading mental health data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Controls -->
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{% static 'js/mind_js/stressmap.js' %}"></script>
+</body>
+
+</html>

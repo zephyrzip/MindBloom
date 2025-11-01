@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>🧠 Emotion Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: #0d1117;
+            color: #fff;
+            font-family: "Segoe UI", sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #58a6ff;
+            margin-bottom: 10px;
+        }
+
+        #status {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* 🎯 Fix oval pie chart */
+        .chart-box {
+            position: relative;
+            width: 350px;
+            height: 350px;
+        }
+
+        canvas {
+            background: #161b22;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #777;
+        }
+
+        button {
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background: #2ea043;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>📊 Emotion Dashboard</h1>
+    <p id="status">Loading mood history...</p>
+    <button onclick="loadDashboard()">🔄 Refresh Dashboard</button>
+
+    <div class="chart-container">
+        <div class="chart-box">
+            <canvas id="pieChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        let pieChart, lineChart;
+
+        async function loadDashboard() {
+            const res = await fetch("http://127.0.0.1:5000/history");
+            const data = await res.json();
+            const status = document.getElementById("status");
+
+            if (!data.length) {
+                status.textContent = "📭 No journal entries found. Try adding one!";
+                return;
+            }
+
+            status.textContent = "";
+
+            // --- Pie Chart Data ---
+            const emotionCounts = {};
+            data.forEach(entry => {
+                const emotion = entry.DominantEmotion || "Unknown";
+                emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
+            });
+
+            const emotions = Object.keys(emotionCounts);
+            const counts = Object.values(emotionCounts);
+
+            // --- Line Chart Data ---
+            const timestamps = data.map(d => d.timestamp);
+            const emotionValues = data.map(d => {
+                const moodScale = {
+                    Joy: 10, Calm: 8, Surprise: 7,
+                    Neutral: 6, Fear: 4, Sadness: 3, Anger: 2, Unknown: 5
+                };
+                return moodScale[d.DominantEmotion] || 5;
+            });
+
+            // --- Destroy previous charts if they exist ---
+            if (pieChart) pieChart.destroy();
+            if (lineChart) lineChart.destroy();
+
+            // --- Pie Chart ---
+            const pieCtx = document.getElementById("pieChart").getContext("2d");
+            pieChart = new Chart(pieCtx, {
+                type: "pie",
+                data: {
+                    labels: emotions,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: [
+                            "#f9d71c", "#f94144", "#90be6d",
+                            "#577590", "#f3722c", "#43aa8b", "#4d908e"
+                        ]
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { labels: { color: "#fff" } },
+                        title: {
+                            display: true,
+                            text: "Emotion Distribution",
+                            color: "#fff",
+                            font: { size: 18 }
+                        }
+                    }
+                }
+            });
+
+            // --- Line Chart ---
+            const lineCtx = document.getElementById("lineChart").getContext("2d");
+            lineChart = new Chart(lineCtx, {
+                type: "line",
+                data: {
+                    labels: timestamps.reverse(),
+                    datasets: [{
+                        label: "Mood Trend",
+                        data: emotionValues.reverse(),
+                        borderColor: "#58a6ff",
+                        tension: 0.3,
+                        fill: false,
+                        pointBackgroundColor: "#58a6ff"
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { ticks: { color: "#ccc" } },
+                        y: {
+                            min: 0,
+                            max: 10,
+                            ticks: { color: "#ccc", stepSize: 1 },
+                            title: { display: true, text: "Mood Level", color: "#aaa" }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: "#fff" } },
+                        title: {
+                            display: true,
+                            text: "Mood Trend Over Time",
+                            color: "#fff",
+                            font: { size: 18 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto load when opened
+        loadDashboard();
+    </script>
+</body>
+</html>

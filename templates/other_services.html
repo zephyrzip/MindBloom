@@ -1,0 +1,565 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatSaarthi</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="{% static 'other_style.css' %}">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <!-- Using a placeholder for logo -->
+            <image src="{% static 'logo.png'%}">
+            <span class="logo-text">SehatSaarthi</span>
+        </div>
+
+        <div class="nav-container" id="navContainer">
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="#pharmacy"><i class="fas fa-pills"></i> Pharmacy</a></li>
+                <li><a href="#insurance"><i class="fas fa-shield-alt"></i> Insurance</a></li>
+                <li><a href="#tests"><i class="fas fa-file-medical"></i> Tests & Reports</a></li>
+                <li><a href="#ngos-volunteers"><i class="fas fa-hands-helping"></i> NGO's & Volunteers</a></li>
+                
+                <li><a href="tel:108" class="emergency-btn"><i class="fas fa-ambulance"></i> Emergency: 108</a></li>
+
+                <div class="nav-buttons">
+                <a href="{% url 'sehatsaarthi' %}" class="btn btn-primary"> SehatSaarthi</a>
+                <a href="{% url 'mindbloom' %}" class="btn btn-primary">MindBloom</a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+        
+        <section id="pharmacy" class="pharmacy-section">
+  <h2>Pharmacy</h2>
+  <p>Order your medicines online at the best price and get them delivered to your doorstep.</p>
+
+  <div class="pharmacy-container">
+
+    <!-- 1 -->
+<div class="pharmacy-card">
+  <i class="fas fa-pills"></i>
+  <h3>Paracetamol</h3>
+  <p>For fever and mild pain relief.</p>
+  <p class="price">₹30</p>
+  <button class="buy-btn" onclick="addToCart('Paracetamol', 30)">Buy Now</button>
+</div>
+
+<!-- 2 -->
+<div class="pharmacy-card">
+  <i class="fas fa-capsules"></i>
+  <h3>Amoxicillin</h3>
+  <p>Antibiotic for bacterial infections.</p>
+  <p class="price">₹120</p>
+  <button class="buy-btn" onclick="addToCart('Amoxicillin', 120)">Buy Now</button>
+</div>
+
+<!-- 3 -->
+<div class="pharmacy-card">
+  <i class="fas fa-tablets"></i>
+  <h3>Ibuprofen</h3>
+  <p>Pain reliever and anti-inflammatory.</p>
+  <p class="price">₹80</p>
+  <button class="buy-btn" onclick="addToCart('Ibuprofen', 80)">Buy Now</button>
+</div>
+
+    <!-- 4 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-prescription-bottle-alt"></i>
+      <h3>Cough Syrup</h3>
+      <p>For cold and dry cough relief.</p>
+      <p class="price">₹95</p>
+      <button class="buy-btn" onclick="addToCart('Cough Syrup', 95)">Buy Now</button>
+    </div>
+
+    <!-- 5 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-apple-alt"></i>
+      <h3>Vitamin C Tablets</h3>
+      <p>Boosts immunity and energy levels.</p>
+      <p class="price">₹150</p>
+ <button class="buy-btn" onclick="addToCart('Vitamin C Tablets', 150)">Buy Now</button>
+    </div>
+
+    <!-- 6 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-water"></i>
+      <h3>ORS Pack</h3>
+      <p>Rehydration solution for weakness.</p>
+      <p class="price">₹25</p>
+       <button class="buy-btn" onclick="addToCart('ORS Pack', 25)">Buy Now</button>
+    </div>
+
+    <!-- 7 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-burn"></i>
+      <h3>Antacid Tablets</h3>
+      <p>For acidity, indigestion, and gas relief.</p>
+      <p class="price">₹60</p>
+       <button class="buy-btn" onclick="addToCart('Antacid Tablets', 60)">Buy Now</button>
+    </div>
+
+    <!-- 8 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-heartbeat"></i>
+      <h3>Multivitamins</h3>
+      <p>Daily supplement for overall health.</p>
+      <p class="price">₹250</p>
+      <button class="buy-btn" onclick="addToCart('Multivitamins', 250)">Buy Now</button>
+    </div>
+
+          <!-- 9 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-syringe"></i>
+      <h3>Insulin</h3>
+      <p>Essential medicine for diabetes care.</p>
+      <p class="price">₹400</p>
+      <button class="buy-btn" onclick="addToCart('Insulin', 400)">Buy Now</button>
+    </div>
+
+    <!-- 10 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-briefcase-medical"></i>
+      <h3>First Aid Kit</h3>
+      <p>Basic medicines and supplies for emergencies.</p>
+      <p class="price">₹500</p>
+      <button class="buy-btn" onclick="addToCart('First Aid Kit', 500)">Buy Now</button>
+    </div>
+
+    <!-- 11 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-capsules"></i>
+      <h3>Azithromycin</h3>
+      <p>Antibiotic for infections.</p>
+      <p class="price">₹160</p>
+      <button class="buy-btn" onclick="addToCart('Azithromycin', 160)">Buy Now</button>
+    </div>
+
+    <!-- 12 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-pills"></i>
+      <h3>Metformin</h3>
+      <p>Medicine for type 2 diabetes.</p>
+      <p class="price">₹110</p>
+     <button class="buy-btn" onclick="addToCart('Metformin', 110)">Buy Now</button>
+    </div>
+
+    <!-- 13 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-capsules"></i>
+      <h3>Losartan</h3>
+      <p>Controls high blood pressure.</p>
+      <p class="price">₹140</p>
+      <button class="buy-btn" onclick="addToCart('Losartan', 140)">Buy Now</button>
+    </div>
+
+    <!-- 14 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-capsules"></i>
+      <h3>Amlodipine</h3>
+      <p>Reduces hypertension & chest pain.</p>
+      <p class="price">₹130</p>
+      <button class="buy-btn" onclick="addToCart('Amlodipine', 130)">Buy Now</button>
+    </div>
+
+    <!-- 15 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-capsules"></i>
+      <h3>Levothyroxine</h3>
+      <p>For thyroid hormone replacement.</p>
+      <p class="price">₹90</p>
+      <button class="buy-btn" onclick="addToCart('Levothyroxine', 90)">Buy Now</button>
+    </div>
+
+    <!-- 16 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-capsules"></i>
+      <h3>Domperidone</h3>
+      <p>Relieves nausea and vomiting.</p>
+      <p class="price">₹75</p>
+      <button class="buy-btn" onclick="addToCart('Domperidone', 75)">Buy Now</button>
+    </div>
+
+    <!-- 17 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-tablets"></i>
+      <h3>Loratadine</h3>
+      <p>For allergy and sneezing relief.</p>
+      <p class="price">₹85</p>
+      <button class="buy-btn" onclick="addToCart('Loratadine', 85)">Buy Now</button>
+    </div>
+
+    <!-- 18 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-tablets"></i>
+      <h3>Calcium Tablets</h3>
+      <p>Strengthens bones & teeth.</p>
+      <p class="price">₹220</p>
+     <button class="buy-btn" onclick="addToCart('Calcium Tablets', 220)">Buy Now</button>
+    </div>
+
+    <!-- 19 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-tablets"></i>
+      <h3>Iron Supplements</h3>
+      <p>Prevents and treats anemia.</p>
+      <p class="price">₹180</p>
+      <button class="buy-btn" onclick="addToCart('Iron Supplements', 180)">Buy Now</button>
+    </div>
+
+    <!-- 20 -->
+    <div class="pharmacy-card">
+      <i class="fas fa-syringe"></i>
+      <h3>Vitamin B12 Injection</h3>
+      <p>For nerve health and energy boost.</p>
+      <p class="price">₹350</p>
+     <button class="buy-btn" onclick="addToCart('Vitamin B12 Injection', 350)">Buy Now</button>
+    </div>
+
+
+      <!-- Cart -->
+    <div id="cartBox">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cartItems"></ul>
+      <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="clearCart()">Clear Cart</button>
+        <button class="btn-primary" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tiny Pharmacy JS to make it work immediately -->
+  <script>
+    // Smooth-scrolling is already enabled in your CSS (html { scroll-behavior: smooth; })
+
+    // Simple cart store
+    const cart = [];
+    function addToCart(name, price) {
+      const existing = cart.find(i => i.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      renderCart();
+    }
+    function removeFromCart(name) {
+      const idx = cart.findIndex(i => i.name === name);
+      if (idx > -1) {
+        cart[idx].qty -= 1;
+        if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      }
+      renderCart();
+    }
+    function clearCart() {
+      cart.length = 0;
+      renderCart();
+    }
+    function renderCart() {
+      const ul = document.getElementById('cartItems');
+      const totalEl = document.getElementById('cartTotal');
+      ul.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${item.name} × ${item.qty}</span>
+          <span>
+            $${(item.price * item.qty).toFixed(2)}
+            <button class="btn-danger" onclick="removeFromCart('${item.name.replace(/'/g, "\\'")}')">Remove</button>
+          </span>`;
+        ul.appendChild(li);
+      });
+      totalEl.textContent = total.toFixed(2);
+    }
+    function checkout() {
+      if (!cart.length) {
+        alert('Your cart is empty.');
+        return;
+      }
+      const summary = cart.map(i => `${i.name} × ${i.qty}`).join(', ');
+      alert(`Order placed for: ${summary}\nTotal: $${document.getElementById('cartTotal').textContent}`);
+      clearCart();
+    }
+    function searchMedicine() {
+      const q = document.getElementById('medicineSearch').value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#medicineGrid .medicine-card');
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        card.style.display = name.includes(q) ? '' : 'none';
+      });
+    }
+  </script>
+
+  <!-- INSURANCE -->
+  <section id="insurance">
+  <h2 style="text-align:center; margin-bottom:20px; color:#2a7de1;">🛡 Health Insurance</h2>
+
+  <div class="insurance-grid">
+
+    <!-- Star Health -->
+    <div class="insurance-card">
+      <i class="fas fa-hospital"></i>
+      <h3>Star Health</h3>
+      <p>Affordable and wide coverage health plans.</p>
+      <div class="btn-row">
+        <a href="https://www.starhealth.in/" target="_blank" class="btn-primary">Buy</a>
+        <a href="https://www.starhealth.in/claims" target="_blank" class="btn-secondary">Claim</a>
+      </div>
+    </div>
+
+    <!-- LIC Health -->
+    <div class="insurance-card">
+      <i class="fas fa-user-shield"></i>
+      <h3>LIC Health</h3>
+      <p>Government-backed trusted health insurance policies.</p>
+      <div class="btn-row">
+        <a href="https://licindia.in/" target="_blank" class="btn-primary">Buy</a>
+        <a href="https://licindia.in/Customer-Services/Claims" target="_blank" class="btn-secondary">Claim</a>
+      </div>
+    </div>
+
+    <!-- ICICI Lombard -->
+    <div class="insurance-card">
+      <i class="fas fa-shield-alt"></i>
+      <h3>ICICI Lombard</h3>
+      <p>Comprehensive family health insurance plans.</p>
+      <div class="btn-row">
+        <a href="https://www.icicilombard.com/health-insurance" target="_blank" class="btn-primary">Buy</a>
+        <a href="https://www.icicilombard.com/claims/health-claims" target="_blank" class="btn-secondary">Claim</a>
+      </div>
+    </div>
+
+    <!-- HDFC Ergo -->
+    <div class="insurance-card">
+      <i class="fas fa-heartbeat"></i>
+      <h3>HDFC Ergo</h3>
+      <p>Cashless treatment in top hospitals across India.</p>
+      <div class="btn-row">
+        <a href="https://www.hdfcergo.com/health-insurance" target="_blank" class="btn-primary">Buy</a>
+        <a href="https://www.hdfcergo.com/claims" target="_blank" class="btn-secondary">Claim</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================== Tests & Reports Section ================== -->
+<section id="tests" class="tests-section">
+  <h2>Tests & Reports</h2>
+  <p>Book health checkups and diagnostic tests online from trusted labs.</p>
+
+  <div class="tests-container">
+    <!-- 1 -->
+    <div class="test-card">
+      <h3>Full Body Checkup</h3>
+      <p>Comprehensive package for overall health assessment.</p>
+      <p class="price">₹1999</p>
+      <a href="https://www.apollo247.com/lab-tests" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 2 -->
+    <div class="test-card">
+      <h3>Blood Sugar Test</h3>
+      <p>Check fasting and post-meal sugar levels.</p>
+      <p class="price">₹299</p>
+      <a href="https://www.lalpathlabs.com/" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 3 -->
+    <div class="test-card">
+      <h3>Lipid Profile</h3>
+      <p>Check cholesterol & triglyceride levels.</p>
+      <p class="price">₹699</p>
+      <a href="https://www.thyrocare.com/" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 4 -->
+    <div class="test-card">
+      <h3>Thyroid Function Test</h3>
+      <p>Measures T3, T4, and TSH hormones.</p>
+      <p class="price">₹499</p>
+      <a href="https://www.apollo247.com/lab-tests" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 5 -->
+    <div class="test-card">
+      <h3>Vitamin D Test</h3>
+      <p>Check Vitamin D deficiency for bone health.</p>
+      <p class="price">₹899</p>
+      <a href="https://www.lalpathlabs.com/" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 6 -->
+    <div class="test-card">
+      <h3>Kidney Function Test</h3>
+      <p>Evaluates creatinine, urea & kidney health.</p>
+      <p class="price">₹799</p>
+      <a href="https://www.thyrocare.com/" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 7 -->
+    <div class="test-card">
+      <h3>Liver Function Test</h3>
+      <p>Assesses liver enzymes and bilirubin levels.</p>
+      <p class="price">₹999</p>
+      <a href="https://www.apollo247.com/lab-tests" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 8 -->
+    <div class="test-card">
+      <h3>Complete Blood Count (CBC)</h3>
+      <p>Measures RBC, WBC & platelet count.</p>
+      <p class="price">₹399</p>
+      <a href="https://www.lalpathlabs.com/" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 9 -->
+    <div class="test-card">
+      <h3>COVID-19 RT-PCR</h3>
+      <p>Confirm active coronavirus infection.</p>
+      <p class="price">₹1200</p>
+      <a href="https://www.thyrocare.com/" target="_blank" class="btn-test">Book Now</a>
+    </div>
+
+    <!-- 10 -->
+    <div class="test-card">
+      <h3>Heart Checkup Package</h3>
+      <p>ECG + Lipid + Sugar + Blood Pressure tests.</p>
+      <p class="price">₹2499</p>
+      <a href="https://www.apollo247.com/lab-tests" target="_blank" class="btn-test">Book Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================== NGOs & Volunteers Section ================== -->
+<section id="ngos-volunteers" class="ngos-section">
+  <h2>🤝 NGOs & Volunteers</h2>
+  <p class="section-intro">
+    Explore trusted NGOs and volunteer initiatives working tirelessly to improve mental health and well-being.
+  </p>
+
+  <div class="ngo-container">
+    
+    <!-- MINDS Foundation -->
+    <div class="ngo-card">
+      <img src="{% static "ngo1.png" %}" alt="MINDS Foundation">
+      <h3>MINDS Foundation</h3>
+      <p>Combating mental health stigma and promoting care in rural communities.</p>
+      <a href="https://www.mindsfoundation.org/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- The Banyan -->
+    <div class="ngo-card">
+      <img src="{% static "ngo2.png" %}" alt="The Banyan">
+      <h3>The Banyan</h3>
+      <p>Providing holistic care for homeless individuals with mental illness in Tamil Nadu.</p>
+      <a href="https://thebanyan.org/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- Sangath -->
+    <div class="ngo-card">
+      <img src="{% static "ngo3.png" %}" alt="Sangath">
+      <h3>Sangath</h3>
+      <p>Community-led psychosocial interventions and research to deliver mental health care.</p>
+      <a href="https://www.sangath.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- Live Love Laugh -->
+    <div class="ngo-card">
+      <img src="{% static "ngo4.png" %}" alt="Live Love Laugh">
+      <h3>Live Love Laugh</h3>
+      <p>Founded by Deepika Padukone to raise awareness about stress, anxiety, and depression.</p>
+      <a href="https://www.thelivelovelaughfoundation.org/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- Vandrevala Foundation -->
+    <div class="ngo-card">
+      <img src="{% static "ngo5.png" %}" alt="Vandrevala Foundation">
+      <h3>Vandrevala Foundation</h3>
+      <p>24/7 suicide prevention and emotional distress helplines across India.</p>
+      <a href="https://vandrevalafoundation.com/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- Lifeline Foundation -->
+    <div class="ngo-card">
+      <img src="{% static "ngo6.png" %}" alt="Lifeline Foundation">
+      <h3>Lifeline Foundation</h3>
+      <p>Kolkata-based NGO offering emotional support through telephone counseling.</p>
+      <a href="http://lifelinekolkata.org/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+    <!-- SCARF -->
+    <div class="ngo-card">
+      <img src="{% static "ngo7.png" %}" alt="SCARF India">
+      <h3>SCARF India</h3>
+      <p>Specialized in care, rehabilitation, and research for severe mental illnesses.</p>
+      <a href="https://scarf.org.in/" target="_blank" class="btn">Visit Website</a>
+    </div>
+
+  </div> <!-- end ngo-container -->
+
+  <!-- Volunteer Signup -->
+  <div class="volunteer-form">
+    <h3>🙋 Become a Volunteer</h3>
+    <form id="volunteerForm">
+      <input type="text" id="volName" placeholder="Your Name" required>
+      <input type="email" id="volEmail" placeholder="Your Email" required>
+      <select id="volInterest" required>
+        <option value="">Select Area of Interest</option>
+        <option value="health">Health</option>
+        <option value="mental">Mental Health</option>
+        <option value="yoga">Yoga & Meditation</option>
+        <option value="elderly">Elderly Care</option>
+      </select>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    <p id="volunteerMsg" class="form-msg"></p>
+  </div>
+<script>
+  document.getElementById("volunteerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let name = document.getElementById("volName").value.trim();
+    let email = document.getElementById("volEmail").value.trim();
+    let interest = document.getElementById("volInterest").value;
+    let msg = document.getElementById("volunteerMsg");
+
+    // Email validation
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (name && emailPattern.test(email) && interest) {
+      msg.style.color = "green";
+      msg.innerHTML = `🎉 Thank you, <b>${name}</b>!<br> We will connect you with NGOs in <b>${interest}</b>.`;
+
+      // Reset form after 4s
+      setTimeout(() => {
+        document.getElementById("volunteerForm").reset();
+        msg.innerHTML = "";
+      }, 4000);
+    } else {
+      msg.style.color = "red";
+      if (!name || !email || !interest) {
+        msg.innerHTML = "⚠️ Please fill all fields before submitting.";
+      } else if (!emailPattern.test(email)) {
+        msg.innerHTML = "⚠️ Please enter a valid email address.";
+      }
+    }
+  });
+</script>
+</section>

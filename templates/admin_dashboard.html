@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Admin Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/sehat_css/admin.css' %}">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h2><i class="fas fa-user-md"></i> Doctor Admin Portal</h2>
+            <p>Add new doctors to the database</p>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <form id="doctorForm">
+            <div class="mb-3">
+                <label for="doctorName" class="form-label">
+                    <i class="fas fa-user"></i> Doctor Name
+                </label>
+                <input type="text" class="form-control" id="doctorName" name="name" required 
+                       placeholder="Enter doctor's full name">
+            </div>
+
+            <div class="mb-3">
+                <label for="specialist" class="form-label">
+                    <i class="fas fa-stethoscope"></i> Specialist
+                </label>
+                <select class="form-control" id="specialist" name="specialist" required>
+                    <option value="">Select Specialist</option>
+                    <option value="General Physician">General Physician</option>
+                    <option value="Pediatrician">Pediatrician</option>
+                    <option value="Cardiologist">Cardiologist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Neurologist">Neurologist</option>
+                    <option value="Gastroenterologist">Gastroenterologist</option>
+                    <option value="Oncologist">Oncologist</option>
+                    <option value="Endocrinologist">Endocrinologist</option>
+                    <option value="Immunologist">Immunologist</option>
+                    <option value="Gynecologist">Gynecologist</option>
+                    <option value="Ophthalmologist">Ophthalmologist</option>
+                    <option value="Hematologist">Hematologist</option>
+                    <option value="Internal Medicine">Internal Medicine</option>
+                    <option value="Orthopedic Surgeon">Orthopedic Surgeon</option>
+                    <option value="Pulmonologist">Pulmonologist</option>
+                    <option value="Rheumatologist">Rheumatologist</option>
+                    <option value="Psychiatrist">Psychiatrist</option>
+                    <option value="Urologist">Urologist</option>
+                    <option value="Nephrologist">Nephrologist</option>
+                    <option value="Dentist">Dentist</option>
+                    <option value="Plastic Surgeon">Plastic Surgeon</option>
+                    <option value="Radiologist">Radiologist</option>
+                    <option value="Pathologist">Pathologist</option>
+                    <option value="Anesthesiologist">Anesthesiologist</option>
+                    <option value="Dietitian">Dietitian</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="fees" class="form-label">
+                    <i class="fas fa-rupee-sign"></i> Consultation Fees
+                </label>
+                <input type="number" class="form-control" id="fees" name="fees" required 
+                       placeholder="Enter consultation fees" min="0" step="1">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-save">
+                    <i class="fas fa-save"></i> Save Doctor
+                </button>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{% url 'sehatsaarthi'%}" class="btn-home">
+                    <i class="fas fa-home"></i> Return to Home
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('doctorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('doctorName').value,
+                specialist: document.getElementById('specialist').value,
+                fees: document.getElementById('fees').value
+            };
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.btn-save');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            submitBtn.disabled = true;
+            
+            fetch('/api/save-doctor/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const alertContainer = document.getElementById('alertContainer');
+                
+                if (data.success) {
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle"></i> ${data.message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    `;
+                    // Reset form
+                    document.getElementById('doctorForm').reset();
+                } else {
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle"></i> ${data.message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                document.getElementById('alertContainer').innerHTML = `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle"></i> Error: ${error.message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `;
+            })
+            .finally(() => {
+                // Restore button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

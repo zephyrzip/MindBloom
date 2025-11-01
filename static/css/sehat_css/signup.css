@@ -1,0 +1,309 @@
+/* Color Palette */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --secondary: #0ea5e9;
+  --accent: #06b6d4;
+  --light: #f0f9ff;
+  --dark: #1e293b;
+  --text: #334155;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --white: #ffffff;
+  --gray: #94a3b8;
+  --gray-light: #e2e8f0;
+  --border-radius: 12px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--light);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Branding */
+.brand {
+  flex: 1;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15rem 2rem;
+  text-align: center;
+}
+
+.brand .logo {
+  width: 80px;
+  margin-bottom: 1rem;
+}
+
+.brand h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.brand p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Signup Box */
+.signup-box {
+  flex: 1;
+  padding: 2.5rem;
+}
+
+.signup-box h2 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+
+.signup-box p {
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.messages {
+  margin-bottom: 1rem;
+}
+
+.alert {
+  padding: 0.8rem 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.alert-success {
+  background: var(--success);
+  color: var(--white);
+}
+
+.alert-error,
+.alert-danger {
+  background: var(--danger);
+  color: var(--white);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.name-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  margin-bottom: 1rem;
+  padding: 0.9rem;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Buttons */
+.primary-btn {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  transition: var(--transition);
+}
+
+.primary-btn:hover {
+  background: var(--primary-dark);
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--gray-light);
+  background: var(--white);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: var(--transition);
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.google-btn:hover {
+  background: var(--light);
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.divider span {
+  background: var(--white);
+  padding: 0 10px;
+  color: var(--gray);
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--gray-light);
+  transform: translateY(-50%);
+}
+
+/* Links */
+.login-link {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--primary);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Medium screens (tablets) */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    max-width: 90%;
+    margin: 10px;
+  }
+
+  .brand,
+  .signup-box {
+    flex: unset;
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+
+  .brand {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+
+  .signup-box {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+
+  .name-inputs {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* Small screens (mobiles) */
+@media (max-width: 576px) {
+
+  html,
+  body {
+    height: auto;
+    min-height: 100dvh;
+    /* better than 100vh on mobile browsers */
+  }
+
+  body {
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  .container {
+    border-radius: var(--border-radius);
+  }
+
+  .brand {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+
+  .brand h1 {
+    font-size: 1.5rem;
+  }
+
+  .brand p {
+    font-size: 0.85rem;
+  }
+
+  .brand .logo {
+    width: 60px;
+  }
+
+  .signup-box {
+    padding: 1.8rem 1.2rem;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+
+  input,
+  .primary-btn,
+  .google-btn {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .login-link {
+    font-size: 0.85rem;
+  }
+}

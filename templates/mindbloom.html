@@ -1,0 +1,457 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindBloom - Your Mental Health Matters</title>
+    <link rel="stylesheet" href="{% static 'css/mind_css/navbar.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mind_css/hero.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mind_css/stats_feature_quote.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mind_css/quiz.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mind_css/yoga_medi.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mind_css/habits.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mind_css/cta_footer.css'%}">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="icon" href="{% static 'images/mind_img/mindbloom_favicon.ico' %}" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#home" class="logo">MindBloom</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#quiz">Assessment</a></li>
+                <li><a href="#yoga-meditation">Yoga & Meditation</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="{% url 'sehatsaarthi'%}" class="nav-cta">SehatSaarthi→</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Your <span class="hero-highlight">Mental Health</span> Matters</h1>
+                    <p class="hero-subtitle">Professional support and compassionate care for your mental wellness
+                        journey. You don't have to struggle in silence.</p>
+                    <div class="hero-buttons">
+                        <a href="#quiz" class="btn-primary">Start Your Journey</a>
+                        <a href="#services" class="btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="visual-container">
+                        <div class="main-circle">
+                            <div class="inner-content">
+                                <h3>Hope</h3>
+                                <p>when your mind tells you there isn't</p>
+                            </div>
+                        </div>
+                        <div class="floating-card card-1">
+                            <h4>24/7 Support</h4>
+                            <p>Always here when you need us</p>
+                        </div>
+                        <div class="floating-card card-2">
+                            <h4>Licensed Professionals</h4>
+                            <p>Expert care you can trust</p>
+                        </div>
+                        <div class="floating-card card-3">
+                            <h4>Safe Space</h4>
+                            <p>Judgment-free environment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10K+</h3>
+                    <p>Lives Transformed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Support Available</p>
+                </div>
+                <div class="stat-item">
+                    <h3>95%</h3>
+                    <p>Success Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>Expert Therapists</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="about" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mental Health is Not a Destination, but a Process</h2>
+                <p class="section-subtitle">Our comprehensive approach ensures you receive the support, tools, and
+                    professional guidance needed for lasting wellness and recovery.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Expert Therapy</h3>
+                    <p>Connect with licensed mental health professionals who specialize in evidence-based treatments
+                        tailored to your unique needs and goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Safe Community</h3>
+                    <p>Join supportive groups where you can share experiences, learn from others, and build meaningful
+                        connections in a judgment-free environment.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Educational Resources</h3>
+                    <p>Access a comprehensive library of mental health resources, self-help tools, and educational
+                        content to empower your healing journey.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <h3>Crisis Support</h3>
+                    <p>Immediate professional help available 24/7 for mental health emergencies. Because urgent care
+                        should never wait for business hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="container">
+            <blockquote class="quote-large">"You are braver than you believe, stronger than you seem, and more loved
+                than you'll ever know."</blockquote>
+            <cite class="quote-author-large">— A.A. Milne</cite>
+        </div>
+    </section>
+
+    <!--Quiz-->
+    <div class="assessment-container">
+        <!-- Left Side - Quiz -->
+        <section class="quizzz" id="quiz">
+            <div class="header">
+                <h1>🧠 Mental Health Assessment</h1>
+                <p>Take this quick assessment to understand your current stress levels and get personalized
+                    recommendations
+                    for your mental wellness journey.</p>
+                <a href="{% url 'stressmap' %}" class="btn-view-map">
+                    🗺️ View India Stress Map
+                </a>
+            </div>
+
+            <div class="pincode-section" id="pincodeSection" style="display: none;">
+                <label for="pincodeInput">Enter your 6-digit Pincode:</label>
+                <input type="text" id="pincodeInput" maxlength="6" pattern="\d{6}" placeholder="e.g., 110001" required>
+                <button type="button" class="btn btn-primary" id="getResultBtn">Get Result</button>
+            </div>
+
+            <div class="quiz-progress-container">
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                </div>
+                <div class="quiz-progress-text" id="quizProgressText">Question 1 of 20</div>
+            </div>
+            <div class="quiz-content">
+                <form id="quizForm">
+                    <!-- Questions will be dynamically generated here -->
+                    <div id="questionsContainer"></div>
+
+                    <div class="navigation">
+                        <button type="button" class="btn btn-secondary" id="prevBtn"
+                            style="display: none;">Previous</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+                    </div>
+                </form>
+
+                <!-- Results Section -->
+            </div>
+            <div id="result" class="result">
+                <div id="resultContent"></div>
+            </div>
+            <script>
+                const mapUrl = "{% url 'stressmap' %}"
+            </script>
+            <script src="{% static 'js/mind_js/quiz.js'%}"></script>
+        </section>
+
+        <!-- Right Side - Journal CTA -->
+        <section class="journal-cta-section">
+            <div class="journal-cta-container">
+                <div class="journal-cta-content">
+                    <div class="journal-icon">📔</div>
+                    <h2>Daily Mental Health Journal</h2>
+                    <p>Express your thoughts and feelings. Write about your day and track your emotional wellbeing over
+                        time.</p>
+                    <a href="{% url 'journal' %}" class="btn-journal">
+                        ✍️ Start Writing Today
+                    </a>
+                </div>
+            </div>
+
+            <!-- Additional Journal Benefits -->
+            <div class="journal-benefits">
+                <div class="benefit-item">
+                    <span class="benefit-icon">🎯</span>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your emotional journey over time</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">💡</span>
+                    <h3>AI Analysis</h3>
+                    <p>Get insights from sentiment analysis</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔒</span>
+                    <h3>Private & Safe</h3>
+                    <p>Your entries are completely confidential</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <a href="{% url 'stressmap' %}" class="floating-map-btn" title="View Stress Map">
+        🗺️
+    </a>
+    <!-- ================== Yoga & Meditation Section ================== -->
+    <section>
+        <div class="main-content" id="yoga-meditation">
+            <!-- Yoga Section -->
+            <div class="column">
+                <div class="section-title">
+                    <i class="fas fa-spa"></i>
+                    <h5>Yoga Practice</h5>
+                </div>
+                <div class="practice-slides" id="yogaSlides">
+                    <!-- Slides will be generated by JavaScript -->
+                </div>
+
+                <div class="practice-nav">
+                    <button type="button" onclick="prevPractice('yoga')">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button type="button" onclick="nextPractice('yoga')">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="timer-bar-container">
+                    <div class="timer-bar" id="yogaTimerBar"></div>
+                </div>
+                <div class="custom-timer">
+                    <label for="timerDuration">Set Timer (minutes):</label>
+                    <input type="number" id="timerDuration" min="1" max="120" value="10">
+                    <button class="timer-btn" id="setTimer">
+                        <i class="fas fa-clock"></i> Set
+                    </button>
+                </div>
+
+                <div class="timer-display" id="yogaTimerDisplay">10:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn" id="startYogaTimer">
+                        <i class="fas fa-play"></i> Start
+                    </button>
+                    <button class="timer-btn" id="pauseYogaTimer">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <button class="timer-btn stop" id="resetYogaTimer">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Meditation & Breathing Section -->
+            <div class="column">
+                <div class="section-title">
+                    <i class="fas fa-leaf"></i>
+                    <h5>Meditation & Breathing</h5>
+                </div>
+
+                <div class="practice-slides" id="meditationSlides">
+                    <!-- Slides will be generated by JavaScript -->
+                </div>
+
+                <div class="practice-nav">
+                    <button type="button" onclick="prevPractice('meditation')">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button type="button" onclick="nextPractice('meditation')">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="breathing-container">
+                    <h4>Breathing Exercise</h4>
+                    <p>Follow the guided breathing pattern to calm your mind and body</p>
+
+                    <div class="circle" id="breathingCircle">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <p id="breathingText">Click Start to Begin</p>
+
+                    <div class="btn-group">
+                        <button id="startBreathing" class="btn">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button id="stopBreathing" class="btn stop">
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const STATIC_URL = "{{ STATIC_URL }}";
+        </script>
+        <script src="{% static 'js/mind_js/yoga_medi.js'%}"></script>
+    </section>
+
+    <!-- Centers Section -->
+    <div class="centers-section">
+        <div class="section-title">
+            <i class="fas fa-map-marker-alt"></i>
+            <h5>Find a Center Near You</h5>
+        </div>
+
+        <div class="center-cards">
+            <div class="center-card">
+                <h3><i class="fas fa-yin-yang"></i> Yoga Centers</h3>
+                <p>Discover authentic yoga experiences with certified instructors in your area.</p>
+                <button class="btn">
+                    <i class="fas fa-search"></i> Find Yoga Center
+                </button>
+            </div>
+
+            <div class="center-card">
+                <h3><i class="fas fa-peace"></i> Meditation Centers</h3>
+                <p>Experience guided meditation sessions in peaceful environments.</p>
+                <button class="btn">
+                    <i class="fas fa-search"></i> Find Meditation Center
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- ================== Healthy Habit Challenge ================== -->
+    <section id="habit-challenge" class="habit-section">
+        <div class="habit-header">
+            <h2>🌱 Healthy Habit Challenge</h2>
+            <p>Select a habit and stay consistent for 7 days!</p>
+        </div>
+
+        <div class="habit-content">
+            <!-- Habit Selection -->
+            <select id="habitSelect">
+                <option value="">-- Choose Your Habit --</option>
+                <option value="Drink 2L Water">💧 Drink 2L Water Daily</option>
+                <option value="Walk 10 Minutes">🚶 Walk 10 Minutes Daily</option>
+                <option value="Meditate 5 Minutes">🧘 Meditate 5 Minutes Daily</option>
+                <option value="Sleep 8 Hours">😴 Get 8 Hours Sleep</option>
+                <option value="Read 15 Minutes">📚 Read 15 Minutes Daily</option>
+                <option value="No Social Media 1 Hour">📱 1 Hour Social Media Break</option>
+            </select>
+
+            <p id="habitMsg">No habit selected yet.</p>
+
+            <!-- Buttons -->
+            <div class="habit-buttons">
+                <button id="markDone" type="button" disabled>✅ Mark as Done</button>
+                <button id="resetChallenge" type="button" class="reset-btn">🔄 Reset Challenge</button>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section">
+                <!-- Day Markers -->
+                <div class="day-markers">
+                    <div class="day-marker" data-day="1">1</div>
+                    <div class="day-marker" data-day="2">2</div>
+                    <div class="day-marker" data-day="3">3</div>
+                    <div class="day-marker" data-day="4">4</div>
+                    <div class="day-marker" data-day="5">5</div>
+                    <div class="day-marker" data-day="6">6</div>
+                    <div class="day-marker" data-day="7">7</div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div id="progressFill"></div>
+                </div>
+
+                <p id="progressText">Progress: 0/7 days</p>
+
+                <div id="streakDisplay" style="display: none;">
+                    <div class="streak-display">
+                        🔥 Current Streak: <span id="streakCount">0</span> days
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/mind_js/habit.js'%}"></script>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="services" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Prioritize Your Mental Health?</h2>
+                <p>Take the first step towards better mental wellness. Our team of professionals is here to support you
+                    every step of the way.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-white">Schedule Consultation</a>
+                    <a href="#" class="btn-outline">Browse Resources</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MindBloom</h3>
+                    <p>Professional mental health support with compassionate care. Your journey to wellness starts here,
+                        and you're never alone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p>Emergency Hotline: 111<br>
+                        Crisis Text Line: Text HOME to 12345<br>
+                        Online Chat Support Available 24/7</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Professional Services</h3>
+                    <p>Licensed Therapists<br>
+                        Group Therapy Sessions<br>
+                        Crisis Intervention<br>
+                        Wellness Programs</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindBloom Mental Health Platform. Your mental health matters.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static "js/mind_js/animate_quote.js" %}"></script>
+</body>
+
+</html>

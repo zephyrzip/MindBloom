@@ -1,0 +1,473 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatSaarthi</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="{% static 'css/sehat_css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sehat_css/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sehat_css/feature.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sehat_css/hospitals.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sehat_css/book_doctor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sehat_css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sehat_css/chatbot.css' %}">
+    
+    <link rel="icon" href="{% static 'images/sehat_img/sehatsaarthi_favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <nav class="navbar">
+        <div class="logo">
+            <!-- Using a placeholder for logo -->
+            <img src="{% static 'images/sehat_img/logo.png'%}" alt="SehatSaarthi Logo">
+            <span class="header-logo-text">SehatSaarthi</span>
+        </div>
+
+        <div class="header-nav-container" id="navContainer">
+            <!-- Navigation Links -->
+            <ul class="header-nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#hospitals"><i class="fas fa-hospital"></i> Find Hospitals</a></li>
+                <li><a href="#book-doctor"><i class="fas fa-user-md"></i> Book Doctors</a></li>
+                <li><a href="{% url 'mindbloom'%}"><i class="fas fa-brain"></i> MindBloom</a></li>
+                
+                <li><a href="tel:108" class="emergency-btn"><i class="fas fa-ambulance"></i> Emergency: 108</a></li>
+            </ul>
+
+        <!-- Right side buttons -->
+        <div class="nav-buttons">
+            {% if user.is_authenticated %}
+                <!-- User dropdown when logged in -->
+                <div class="user-dropdown" id="user-dropdown">
+                    <a href="#" class="user-btn">
+                        <i class="fas fa-user"></i> 
+                        Hi, {{ user.first_name }}<i class="fas fa-chevron-down"></i></a>
+                    <div class="user-dropdown-content">
+                        <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'admin_dashboard'%}"><i class="fas fa-cog"></i> Admin Dashboard</a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <!-- Login/Signup buttons when not logged in -->
+                <a href="{% url 'login' %}" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="{% url 'signup' %}" class="signup-btn">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger" id="hamburgerBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <script src="{% static "js/sehat_js/navbar.js" %}"></script>
+    </nav>
+
+    <!-- Hero Section (Full Screen) -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Welcome To <br><span class="highlight">SEHATSAARTHI</span></h1>
+            <h2>Your compass for a <span class="accent">Healthy Life</span></h2>
+            <p>
+                <span class="primary">SEHATSAARTHI</span> is a collaborative digital ecosystem designed to make
+                healthcare more accessible, equitable, and holistic. It goes beyond treating illness
+                by focusing on long-term wellness and fostering a connected healthcare network for all.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{% url 'mindbloom'%}" class="btn btn-primary">Connect with MindBloom</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{% static "images/sehat_img/docimage.png" %}" alt="Healthcare Illustration">
+        </div>
+    </section>
+
+
+    <!-- Features Section -->
+    <section class="features" id="about">
+        <div class="section-title">
+            <h2>About SehatSaarthi</h2>
+                <p>
+                    SEHATSAARTHI is more than just a healthcare platform.
+                    Our mission is to bridge the gap between patients, doctors, and healthcare providers by creating a
+                    <b>connected and inclusive ecosystem</b>.
+                    We aim to make healthcare accessible, affordable, and personalized for everyone, especially
+                    underserved communities.
+                </p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hospital"></i>
+                </div>
+                <h3>Find Hospitals</h3>
+                <p>Locate the best healthcare facilities near you with detailed information and patient reviews.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Book Doctors</h3>
+                <p>Schedule appointments with specialist doctors based on your health needs and availability.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Mental Health</h3>
+                <p>Access resources and professionals for mental well-being and emotional support.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-ambulance"></i>
+                </div>
+                <h3>Emergency Care</h3>
+                <p>Immediate assistance and emergency services when you need them the most.</p>
+            </div>
+        </div>
+    </section>
+
+ <!-- Hospitals Section -->
+    <section class="hospitals" id="hospitals">
+        <div class="container">
+            <div class="header">
+                <h1>Hospital & Clinic Finder</h1>
+                <p>Find hospitals and clinics near you with emergency contact information</p>
+            </div>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search for a hospital or clinic..." />
+                    <button class="btn" onclick="searchHospital()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                    <button class="btn btn-outline" onclick="findNearbyFacilities()">
+                        <i class="fas fa-location-arrow"></i> Find Nearby
+                    </button>
+                </div>
+            </div>
+
+            <div id="facilityCount" class="facility-count" style="display: none;"></div>
+
+            <div class="content">
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+                
+                <div class="sidebar">
+                    <h2>Nearby Hospitals & Clinics</h2>
+                    <p id="list-instruction">Click "Find Nearby" to locate medical facilities near you</p>
+                    <div class="hospitals-list" id="hospital-list">
+                        <!-- Hospital items will be dynamically inserted here -->
+                        <div class="hospital-item" style="text-align: center; padding: 2rem; color: var(--gray);">
+                            <i class="fas fa-hospital" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                            <p>Use the search or "Find Nearby" button to discover medical facilities in your area</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i> Loading medical facilities...
+            </div>
+        </div>
+    </section>
+
+    <!-- JS File -->
+        <script>
+            AOS.init({
+                duration: 1000, // animation speed in ms
+                once: true      // only animate the first time you scroll
+            });
+        </script>
+        <!-- Leaflet JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+        <script src="{%static "js/sehat_js/map.js" %}"></script>
+    </section>
+
+    <!-- Chatbot Section -->
+     <section>
+        <script src="{%static "js/sehat_js/chatbot.js" %}"></script>
+     </section>
+
+
+
+<!-- Book a Doctor Section -->
+   <section id="book-doctor">
+        <h2 class="section-heading">Find a Doctor</h2>
+        <p class="section-subheading">Choose from our wide range of specialists for your healthcare needs.</p>
+
+        <div class="searchContainer">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="specialtySearch" placeholder="Search for a specialist...">
+        </div>
+
+        <div class="main-container">
+            <div class="specialties-section">
+                <div class="doctor-specialties" id="specialtiesContainer">
+                    <!-- Specialty Cards -->
+                    <div class="specialty-card" onclick="selectSpecialty('General Physician')" data-specialty="general physician">
+                        <i class="fas fa-user-md"></i>
+                        <h3>General Physician</h3>
+                        <p>Primary care for common illnesses and check-ups.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Pediatrician')" data-specialty="pediatrician">
+                        <i class="fas fa-baby"></i>
+                        <h3>Pediatrician</h3>
+                        <p>Specialist for infants, children, and teenagers.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Cardiologist')" data-specialty="cardiologist">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Cardiologist</h3>
+                        <p>Expert in heart health, BP, and circulatory system.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Dermatologist')" data-specialty="dermatologist">
+                        <i class="fas fa-allergies"></i>
+                        <h3>Dermatologist</h3>
+                        <p>Skin, hair, and nail conditions and treatments.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Neurologist')" data-specialty="neurologist">
+                        <i class="fas fa-brain"></i>
+                        <h3>Neurologist</h3>
+                        <p>Brain, spine, and nervous system disorders.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Gastroenterologist')" data-specialty="gastroenterologist">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Gastroenterologist</h3>
+                        <p>Digestive system, stomach, liver, and intestines.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Oncologist')" data-specialty="oncologist">
+                        <i class="fas fa-ribbon"></i>
+                        <h3>Oncologist</h3>
+                        <p>Specialist in cancer treatment and care.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Endocrinologist')" data-specialty="endocrinologist">
+                        <i class="fas fa-flask"></i>
+                        <h3>Endocrinologist</h3>
+                        <p>Hormones, diabetes, thyroid, and metabolism.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Immunologist')" data-specialty="immunologist">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Immunologist</h3>
+                        <p>Allergies and immune system-related diseases.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Gynecologist')" data-specialty="gynecologist">
+                        <i class="fas fa-female"></i>
+                        <h3>Obstetrics & Gynaecology</h3>
+                        <p>Women's health, pregnancy, and reproductive care.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Ophthalmologist')" data-specialty="ophthalmologist">
+                        <i class="fas fa-eye"></i>
+                        <h3>Ophthalmologist</h3>
+                        <p>Specialist for eye and vision care.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Hematologist')" data-specialty="hematologist">
+                        <i class="fas fa-tint"></i>
+                        <h3>Hematologist</h3>
+                        <p>Blood disorders and related treatments.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Internal Medicine')" data-specialty="internal medicine">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>Internal Medicine</h3>
+                        <p>Comprehensive adult healthcare and chronic illnesses.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Orthopedic Surgeon')" data-specialty="orthopedic surgeon">
+                        <i class="fas fa-bone"></i>
+                        <h3>Orthopedic Surgeon</h3>
+                        <p>Bones, joints, fractures, and musculoskeletal system.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Pulmonologist')" data-specialty="pulmonologist">
+                        <i class="fas fa-lungs"></i>
+                        <h3>Pulmonologist</h3>
+                        <p>Specialist in lungs and respiratory diseases.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Rheumatologist')" data-specialty="rheumatologist">
+                        <i class="fas fa-hand-paper"></i>
+                        <h3>Rheumatologist</h3>
+                        <p>Arthritis, joint, and autoimmune conditions.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Psychiatrist')" data-specialty="psychiatrist">
+                        <i class="fas fa-brain"></i>
+                        <h3>Psychiatrist</h3>
+                        <p>Mental health, depression, anxiety, and therapy.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Urologist')" data-specialty="urologist">
+                        <i class="fas fa-toilet"></i>
+                        <h3>Urologist</h3>
+                        <p>Kidneys, bladder, urinary tract, and male health.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Nephrologist')" data-specialty="nephrologist">
+                        <i class="fas fa-water"></i>
+                        <h3>Nephrologist</h3>
+                        <p>Specialist in kidney diseases and dialysis care.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Dentist')" data-specialty="dentist">
+                        <i class="fas fa-tooth"></i>
+                        <h3>Dentist</h3>
+                        <p>Teeth, gums, and overall oral health care.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Plastic Surgeon')" data-specialty="plastic surgeon">
+                        <i class="fas fa-user-ninja"></i>
+                        <h3>Plastic Surgeon</h3>
+                        <p>Reconstructive and cosmetic surgery.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Radiologist')" data-specialty="radiologist">
+                        <i class="fas fa-x-ray"></i>
+                        <h3>Radiologist</h3>
+                        <p>X-rays, MRI, CT scans, and diagnostic imaging.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Pathologist')" data-specialty="pathologist">
+                        <i class="fas fa-vial"></i>
+                        <h3>Pathologist</h3>
+                        <p>Examines lab samples to diagnose disease.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Anesthesiologist')" data-specialty="anesthesiologist">
+                        <i class="fas fa-syringe"></i>
+                        <h3>Anesthesiologist</h3>
+                        <p>Provides anesthesia during surgery.</p>
+                    </div>
+
+                    <div class="specialty-card" onclick="selectSpecialty('Dietitian')" data-specialty="dietitian">
+                        <i class="fas fa-apple-alt"></i>
+                        <h3>Dietitian</h3>
+                        <p>Nutrition, diet, and lifestyle management.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doctors-panel">
+                <div class="panel-header">
+                    <h3 class="panel-title" id="panelTitle">
+                        <i class="fas fa-user-doctor"></i>
+                        Select a Specialty
+                    </h3>
+                    <input type="text" class="doctor-search hidden" id="doctorSearch" placeholder="Search doctors...">
+                </div>
+                <div class="panel-content" id="panelContent">
+                    <div class="empty-state">
+                        <i class="fas fa-stethoscope"></i>
+                        <p>Click on a specialty to view available doctors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static "js/sehat_js/book_doctor.js" %}"></script>
+    </section>
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="logo">
+                        <img src="{% static "images/sehat_img/logo.png" %}"alt="SehatSaarthi Logo">
+                        <span class="footer-logo-text">SehatSaarthi</span>
+                    </div>
+                    <p class="footer-description">
+                        SehatSaarthi is a collaborative digital ecosystem designed to make healthcare more accessible, 
+                        equitable, and holistic for everyone.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#hospitals"><i class="fas fa-chevron-right"></i> Find Hospitals</a></li>
+                        <li><a href="#book-doctor"><i class="fas fa-chevron-right"></i> Book Doctors</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href=""><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href=""><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Links -->
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'mindbloom'%}"><i class="fas fa-chevron-right"></i> Mental Health & Well Being</a></li>
+                        <li><a href=""><i class="fas fa-chevron-right"></i> AI Diagnosis</a></li>
+                        <li><a href=""><i class="fas fa-chevron-right"></i> Pharmacy</a></li>
+                        <li><a href="#hospitals"><i class="fas fa-chevron-right"></i> Ambulance Service</a></li>
+                        <li><a href=""><i class="fas fa-chevron-right"></i> Yoga & Meditation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Heritage Institute of Technology</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+911234567890">+91 12345 67890</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@sehatsaarthi.com">info@sehatsaarthi.com</a></p>
+                        <p><i class="fas fa-ambulance"></i> Emergency: <a href="tel:108">108</a></p>
+                    </div>
+                    
+                    <!-- Newsletter Subscription -->
+                    <div class="newsletter">
+                        <h4>Subscribe to Our Newsletter</h4>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 SehatSaarthi. All rights reserved.</p>
+            </div>
+        </div>
+        <script src="{% static 'js/sehat_js/footer.js' %}"></script>
+    </footer>
+</body>
+
+</html>
