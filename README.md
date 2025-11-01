@@ -45,4 +45,7 @@ It combines mood tracking, habit challenges, and a mental wellness assessment ma
 
 ❤ Acknowledgment
     Special thanks to mentors and peers for their guidance during Hackspire’25.
+
+⌛Future Vision
+    Chatbot with voice assistants!
     Together, we aim to make mental wellness accessible, data-informed, and compassionate.
