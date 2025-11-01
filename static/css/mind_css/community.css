@@ -1,0 +1,51 @@
+body {
+    background: #0d1117;
+    color: #fff;
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
+    padding: 30px;
+}
+
+h1 {
+    color: #58a6ff;
+}
+
+button {
+    background: #238636;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #2ea043;
+}
+
+.post {
+    background: #161b22;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 15px auto;
+    max-width: 700px;
+    text-align: left;
+}
+
+.comment {
+    background: #0d1117;
+    border-left: 3px solid #58a6ff;
+    margin: 8px 0;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+input.comment-box {
+    width: 90%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 6px;
+}

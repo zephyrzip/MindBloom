@@ -13,4 +13,5 @@ urlpatterns = [
     path('unauthorized/', views.unauthorized_view, name='unauthorized'),
     path('journal/', views.journal_view, name='journal'),
     path('sentiment_dashboard/', views.sentiment_dashboard_view, name='sentiment_dashboard'),
+    path('community/', views.community_view, name='community'),
 ]

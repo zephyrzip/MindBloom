@@ -193,3 +193,6 @@ def journal_view(request):
 
 def sentiment_dashboard_view(request):
     return render(request, 'sentiment_dashboard.html')
+
+def community_view(request):
+    return render(request, 'community.html')

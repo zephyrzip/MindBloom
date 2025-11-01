@@ -359,12 +359,20 @@
         onclick="analyzeSentiment()">
         🧠 Analyze Emotions
     </button>
-
+    <button class="tool-btn" style="margin:10px auto;display:block;font-size:16px;padding:12px 20px;
+  background:linear-gradient(135deg,#22c55e 0%,#16a34a 100%);
+  color:white;border:none;border-radius:16px;
+  box-shadow:0 4px 16px rgba(34,197,94,0.4);
+  transition:all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+        onclick="postToCommunity()"><a href="{% url 'community' %}">
+        🌍 Post to Community
+    </a></button>
     <button class="tool-btn" style="margin:25px auto;display:block;font-size:16px;padding:12px 20px;
   background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
   color:white;border:none;border-radius:16px;
   box-shadow:0 4px 16px rgba(102,126,234,0.4);
-  transition:all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" target="_blank"><a href="{% url 'sentiment_dashboard' %}" style="text-decoration: none;">📊 View Dashboard</a></button>
+  transition:all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" target="_blank"><a
+            href="{% url 'sentiment_dashboard' %}" style="text-decoration: none;">📊 View Dashboard</a></button>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static 'js/mind_js/journal.js' %}"></script>
 

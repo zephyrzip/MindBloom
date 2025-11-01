@@ -629,3 +629,50 @@ async function loadMoodHistory() {
 function closeModal() {
     document.getElementById("sentimentModal").style.display = "none";
 }
+
+async function postToCommunity() {
+    const textContent = document.getElementById('wordEditor').innerText.trim();
+    if (!textContent) {
+        alert("Please write something in your journal before posting.");
+        return;
+    }
+
+    // Filter bad or depressing words
+    const sanitized = sanitizeText(textContent);
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/community", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                text: sanitized,
+                timestamp: new Date().toLocaleString()
+            })
+        });
+
+        if (response.ok) {
+            alert("✅ Your journal has been posted to the community!");
+            window.open("community.html", "_blank");
+        } else {
+            const data = await response.json();
+            alert("❌ Failed to post: " + (data.error || "Unknown error"));
+        }
+    } catch (error) {
+        console.error(error);
+        alert("⚠️ Error posting to community. Check if Flask is running.");
+    }
+}
+
+function sanitizeText(input) {
+    const badWords = [
+        "hate", "worthless", "useless", "stupid", "idiot", "kill",
+        "suicide", "hopeless", "depressed", "sad", "die",
+        "fuck", "shit", "bitch", "bastard", "asshole"
+    ];
+    let filtered = input;
+    for (const word of badWords) {
+        const regex = new RegExp(`\\b${word}\\b`, "gi");
+        filtered = filtered.replace(regex, "❤️");
+    }
+    return filtered;
+}
